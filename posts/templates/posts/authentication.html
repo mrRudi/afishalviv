@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load account %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+<br>
+{{accounts.facebook}}
+<hr>
+{{accounts.facebook.0}}
+<hr>
+{% user_display user %}
+<hr>
+    <h1>{% trans "Sign In" %}</h1>
+	<p>{% blocktrans with site.name as site_name %}Please sign in with one of your existing third party accounts. {% endblocktrans %}</p>
+	<div class="socialaccount_ballot">
+ 	<ul class="socialaccount_providers">
+        <hr>
+	{% include "account/logout.html" %}
+        <hr>
+	</ul>
+	<div class="login-or">{% trans 'or' %}</div>
+	</div>
+	{% include "socialaccount/snippets/login_extra.html" %}

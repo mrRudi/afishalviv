@@ -1,0 +1,21 @@
+{% extends 'posts/home.html' %}
+
+{% load static %}
+{% load urlify %}
+
+{% block content %}
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1>Підтвердіть видалення</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <p>Ви точно хочете видалити : "{{ object.content }}" ?</p>
+        <input type="submit" value="Підтвердити" class="btn btn-warning">
+        <a href="{{ object.get_absolute_url }}" class="btn btn-default">Назад</a>
+    </form>
+
+
+</div>
+
+{% endblock content %}

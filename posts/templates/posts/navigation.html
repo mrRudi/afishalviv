@@ -1,0 +1,59 @@
+
+{% load staticfiles %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-left" href="{% url 'posts:list' %}">
+        <img class="img-responsive" alt="Brand" height="140" width="140" src="{% static 'logo/logo_navigator.png' %}">
+      </a>
+      {% include 'posts/search.html' %}
+
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Події <span class="caret"></span></a>
+          <ul class="dropdown-menu mycolon" >
+
+             <li>
+            <ul class="list-unstyled col-sm-6">
+                <li><a href="{% url 'posts:list' %}?category=ART">Мистецтво</a></li>
+                <li><a href="{% url 'posts:list' %}?category=MUSIC">Музика</a></li>
+                <li><a href="{% url 'posts:list' %}?category=CINEMA">Кіно</a></li>
+                <li><a href="{% url 'posts:list' %}?category=THEATER">Театр</a></li>
+                <li><a href="{% url 'posts:list' %}?category=LITERATURE">Література</a></li>
+                <li><a href="{% url 'posts:list' %}?category=SPORT">Спорт</a></li>
+            </ul>
+            <ul class="list-unstyled col-sm-6">
+                <li><a href="{% url 'posts:list' %}?category=NIGHTLIFE">Нічне життя</a></li>
+                <li><a href="{% url 'posts:list' %}?category=FESTIVALS">Фестивалі</a></li>
+                <li><a href="{% url 'posts:list' %}?category=TEACHING">Навчання</a></li>
+                <li><a href="{% url 'posts:list' %}?category=BUSINESS">Бізнес</a></li>
+                <li><a href="{% url 'posts:list' %}?category=EXCURSIONS">Екскурсії</a></li>
+                <li><a href="{% url 'posts:list' %}?category=OTHER">Інше</a></li>
+            </ul>
+            </li>
+
+          </ul>
+        </li>
+      </ul>
+
+        <ul class="nav navbar-nav">
+            <li>
+                <p class="navbar-btn">
+                    <a href="{% url 'posts:create' %}" class="btn btn-default">Нова подія</a>
+                </p>
+            </li>
+        </ul>
+
+    </div>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_active %}
+                <li><a href="{% url 'register:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Вийти</a></li>
+            {% else %}
+                <li><a href="{% url 'register:register' %}"><span class="glyphicon glyphicon-user"></span> Реєстрація</a></li>
+                <li><a href="{% url 'register:login' %}"><span class="glyphicon glyphicon-log-in"></span> Увійти</a></li>
+            {% endif %}
+        </ul>
+  </div>
+
+</nav>

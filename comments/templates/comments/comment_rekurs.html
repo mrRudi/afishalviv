@@ -1,0 +1,22 @@
+
+{% for child_comment in value.children %}
+
+    <blockquote class="blockquote">
+        <p class="mb-0">{{ child_comment.content }}</p>
+        <footer class="blockquote-footer">Користувач {{ child_comment.user }} | {{ child_comment.timespamp|timesince }} <a href="{{ child_comment.get_absolute_url }}">детально</a> {% if child_comment.user == request.user %}<a href="{{ child_comment.get_delete_url }}">видалити</a>{% endif %}</footer>
+
+        {% if  child_comment.children %}
+             {% include 'comments/comment_rekurs.html' with value=child_comment form=form %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.content }}
+            <input id="id_object_id" name="object_id" type="hidden" value="{{ child_comment.id }}">
+            <input id="id_content_type" name="content_type" type="hidden" value="{{ child_comment.get_content_type }}">
+            <input type="submit" value="submit" class="btn btn-default">
+        </form>
+
+    </blockquote>
+
+{% endfor %}

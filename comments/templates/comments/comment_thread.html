@@ -1,0 +1,21 @@
+{% extends 'posts/home.html' %}
+
+{% block content %}
+<p class="lead">Coment{% if object.children.count > 1 %}s{% endif %}</p>
+
+        <blockquote class="blockquote">
+            <p class="mb-0">{{ object.content }}</p>
+            <footer class="blockquote-footer">Користувач {{ object.user }} | {{ object.timespamp|timesince }} <a href="{{ object.get_absolute_url }}">детально</a> {% if object.user == request.user %}<a href="{{ object.get_delete_url }}">видалити</a>{% endif %}</footer>
+
+            {% include 'comments/comment_rekurs.html' with value=object form=form %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.content }}
+                <input id="id_object_id" name="object_id" type="hidden" value="{{ object.id }}">
+                <input id="id_content_type" name="content_type" type="hidden" value="{{ object.get_content_type }}">
+                <input type="submit" value="submit" class="btn btn-default">
+            </form>
+
+        </blockquote>
+{% endblock content %}

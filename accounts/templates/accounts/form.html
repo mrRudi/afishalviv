@@ -1,0 +1,10 @@
+{% extends 'posts/home.html' %}
+
+{% block content %}
+    <h1>{{ title|upper }}</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{{ title }}" class="btn btn-default">
+    </form>
+{% endblock content %}

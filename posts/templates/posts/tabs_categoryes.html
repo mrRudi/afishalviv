@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs nav-justified">
+    {% for key, key_ua in category.items  %}
+        <li {% if category_active == key %}class="active"{% endif %} ><a  href="{% url 'posts:list' %}?category={{ key }}">{{ key_ua|safe }}</a></li>
+    {% endfor %}
+</ul>
+<br>

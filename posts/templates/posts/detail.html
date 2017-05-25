@@ -1,0 +1,65 @@
+{% extends 'posts/home.html' %}
+
+{% load static %}
+{% load urlify %}
+
+{% block title %}
+    {{ instance.title|truncatechars:8 }} | {{ block.super }}
+{% endblock title %}
+
+{% block script %}
+    {{ block.super }}
+    <script src="{% static 'posts/image_responsive.js' %}"></script>
+{% endblock script %}
+
+{% block content %}
+<div class="col-sm-6 col-sm-offset-3">
+    {% if instance.image %}
+        <img src="{{ instance.image.url }}" class="img-responsive">
+    {% endif %}
+    {% if request.user == instance.user %}
+        <a type="button" class="btn btn-danger" href="{% url 'posts:update' instance.slug %}">Редагувати</a>
+    {% endif %}
+    <h1>{{ instance }}<p class="star">{{ instance.rating|star }}</p> <small>{% if instance.draft %}<span style="color: red"> Чорновик </span>{% endif %}{{ instance.timestamp }}<br>додано {{ instance.timestamp|timesince }} тому</small></h1>
+
+    <p>час читання: {% if instance.read_time <= 1 %}< 1{% else %}{{ instance.read_time }}{% endif %} хвилини</p>
+
+    {% if instance.user.get_full_name %}
+        <p>Автор: {{ instance.user.get_full_name }}</p>
+    {% endif %}
+
+    <hr/>
+    {{ instance.get_markdown_safe }}
+    <hr/>
+
+    <p class="lead">Coments</p>
+
+    {% for comment in comments %}
+        <blockquote class="blockquote">
+            <p class="mb-0">{{ comment.content }}</p>
+            <footer class="blockquote-footer">Користувач {{ comment.user }} | {{ comment.timespamp|timesince }} <a href="{{ comment.get_absolute_url }}">детально</a> {% if comment.user == request.user %}<a href="{{ comment.get_delete_url }}">видалити</a>{% endif %}</footer>
+
+            {% include 'posts/tmp.html' with value=comment form=comment_form %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ comment_form.content }}
+                <input id="id_object_id" name="object_id" type="hidden" value="{{ comment.id }}">
+                <input id="id_content_type" name="content_type" type="hidden" value="{{ comment.get_content_type }}">
+                <input type="submit" value="submit" class="btn btn-default">
+            </form>
+
+        </blockquote>
+    {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ comment_form.content_type }}
+        {{ comment_form.object_id }}
+        {{ comment_form.content }}
+        <button type="submit" value="submit" class="btn">Submit</button>
+    </form>
+
+</div>
+
+{% endblock content %}

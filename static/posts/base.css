@@ -1,0 +1,22 @@
+/*.col-sm-6  {*/
+    /*word-wrap: break-word;*/
+/*}*/
+
+.mycolon {
+  min-width: 220px;
+}
+
+p.star {
+  display: inline-block;
+  font-size: 75%;
+}
+/*li a.padding_lr {*/
+    /*padding-right: 0%;*/
+    /*padding-left: 0%;*/
+/*}*/
+
+
+/*.pagination  {*/
+    /*text-align: center;*/
+    /*word-wrap: normal;*/
+/*}*/

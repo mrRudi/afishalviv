@@ -1,0 +1,24 @@
+{% load urlify %}
+
+<form method="get" action="{% url 'posts:list' %}" class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search" value="{{ request.GET.q }}">
+    </div>
+    <div class="form-group">
+        <ul class="nav navbar-nav">
+             <li class="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">за рейтингом<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                     <li><a href="#" class="small" ><input type="radio" name="rating" value=5 > &#9733;&#9733;&#9733;&#9733;&#9733;</a></li>
+                     <li><a href="#" class="small" ><input type="radio" name="rating" value=4 > &#9733;&#9733;&#9733;&#9733;&#9734;</a></li>
+                     <li><a href="#" class="small" ><input type="radio" name="rating" value=3 > &#9733;&#9733;&#9733;&#9734;&#9734;</a></li>
+                     <li><a href="#" class="small" ><input type="radio" name="rating" value=2 > &#9733;&#9733;&#9734;&#9734;&#9734;</a></li>
+                     <li><a href="#" class="small" ><input type="radio" name="rating" value=1 > &#9733;&#9734;&#9734;&#9734;&#9734;</a></li>
+                </ul>
+             </li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit">Search<i class="fa fa-search"></i></button>
+    </div>
+</form>
